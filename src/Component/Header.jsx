@@ -46,31 +46,7 @@ const Header = () => {
               <FaCaretDown />
             </button>
 
-            <AnimatePresence>
-              {menuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full left-0 mt-3 bg-black/80 backdrop-blur-lg border border-cyan-300/30 shadow-xl rounded-md py-2 w-56 z-20"
-                >
-                  {['ai', 'web', 'appde', 'soft'].map((path) => (
-                    <a
-                      key={path}
-                      href={`/${path}`}
-                      className="block px-4 py-2 text-sm hover:text-cyan-400 transition"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {capitalizeFirst(
-                        path
-                          .replace('appde', 'App Development')
-                          .replace('soft', 'Software Development')
-                      )}
-                    </a>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+        
           </div>
         </nav>
 
@@ -94,7 +70,7 @@ const Header = () => {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden bg-black/80 backdrop-blur-md border-t border-cyan-400/20 text-cyan-200 px-6 py-5 space-y-3"
           >
-            {['home', 'AI', 'Web Development', 'App Development', 'Software Development'].map((item, idx) => (
+            {['home'].map((item, idx) => (
               <a
                 key={idx}
                 href={`/${item.toLowerCase().replace(' ', '').replace('development', '')}`}
