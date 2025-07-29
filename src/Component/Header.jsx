@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Logo from '../Asset/1.png'; // Make sure this path is correct
-import { FaCaretDown, FaBars, FaTimes, FaBriefcase } from 'react-icons/fa';
+import Logo from '../Asset/5.png'; // Update path if needed
+import { FaCaretDown, FaBars, FaTimes, FaHardHat } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -22,39 +22,45 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="fixed z-30 w-full backdrop-blur-md bg-gradient-to-r from-cyan-500 via-black to-blue-600 shadow-lg">
+    <header className="fixed z-30 w-full backdrop-blur-md bg-gradient-to-r from-yellow-600 via-black to-yellow-500 shadow-lg">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-8 h-12 md:h-16">
+        {/* Logo */}
         <a href="/" className="flex items-center gap-2">
           <motion.img
             src={Logo}
-            alt="Logo"
+            alt="Poeage Builders Logo"
             className="h-12 drop-shadow-md"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           />
         </a>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-10 text-white font-medium">
-          <a href="/" className="nav-item">{capitalizeFirst('home')}</a>
+          <a href="/" className="nav-item">{capitalizeFirst('Home')}</a>
 
           <div className="relative" ref={menuRef}>
             <button
               onClick={() => setMenuOpen((prev) => !prev)}
               className="flex items-center gap-2 nav-item"
             >
-              <FaBriefcase className="text-base" />
-              {capitalizeFirst('services')}
+              <FaHardHat className="text-base" />
+              {capitalizeFirst('Projects')}
               <FaCaretDown />
             </button>
-
-        
+            {/* Add dropdown here if needed */}
           </div>
+
+          <a href="/solutions" className="nav-item">{capitalizeFirst('Solutions')}</a>
+          <a href="/contact" className="nav-item">{capitalizeFirst('Contact')}</a>
         </nav>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="text-2xl text-cyan-200 focus:outline-none"
+            className="text-2xl text-yellow-200 focus:outline-none"
           >
             {mobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -68,13 +74,13 @@ const Header = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden bg-black/80 backdrop-blur-md border-t border-cyan-400/20 text-cyan-200 px-6 py-5 space-y-3"
+            className="md:hidden bg-black/90 backdrop-blur-md border-t border-yellow-400/20 text-yellow-200 px-6 py-5 space-y-3"
           >
-            {['home'].map((item, idx) => (
+            {['Home', 'Projects', 'Solutions', 'Contact'].map((item, idx) => (
               <a
                 key={idx}
-                href={`/${item.toLowerCase().replace(' ', '').replace('development', '')}`}
-                className="block py-2 hover:text-cyan-400 transition"
+                href={`/${item.toLowerCase().replace(/\s+/g, '')}`}
+                className="block py-2 hover:text-yellow-400 transition"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {capitalizeFirst(item)}
@@ -82,8 +88,8 @@ const Header = () => {
             ))}
 
             <a
-              href="/quotes"
-              className="block mt-4 text-center text-sm font-bold bg-cyan-400 text-black py-2 rounded-full shadow hover:bg-white transition"
+              href="/quote"
+              className="block mt-4 text-center text-sm font-bold bg-yellow-400 text-black py-2 rounded-full shadow hover:bg-white transition"
               onClick={() => setMobileMenuOpen(false)}
             >
               Get a Quote
@@ -92,7 +98,7 @@ const Header = () => {
         )}
       </AnimatePresence>
 
-      {/* Custom CSS */}
+      {/* Hover Underline CSS */}
       <style>{`
         .nav-item {
           position: relative;
@@ -105,7 +111,7 @@ const Header = () => {
           left: 0;
           width: 0%;
           height: 2px;
-          background: cyan;
+          background: yellow;
           transition: width 0.3s ease;
         }
         .nav-item:hover::after {
