@@ -7,10 +7,10 @@ export default function Home() {
       {/* Hero Section */}
       <div className="max-w-xl text-center md:text-left">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 text-slate-800">
-          Building the Future, One Project at a Time
+          Shaping Tomorrow's Skylines, Today
         </h1>
         <p className="text-md md:text-lg text-gray-700 leading-relaxed">
-          Welcome to <span className="font-semibold text-yellow-500">Poeage Builders</span> — your trusted partner in digital construction, smart design, and infrastructure innovation.
+          Welcome to <span className="font-semibold text-yellow-500">Poeage Builders</span> — your reliable partner in civil construction, infrastructure development, and structural excellence.
         </p>
       </div>
 
@@ -18,7 +18,7 @@ export default function Home() {
       <div className="max-w-md text-center md:text-left">
         <h2 className="text-2xl font-semibold text-slate-900 mb-4">What We Build</h2>
         <p className="text-gray-700 mb-6">
-          From websites and apps to enterprise platforms and automation systems — we engineer digital solutions that support real-world businesses, civil projects, and industries.
+          From residential and commercial buildings to industrial facilities and public infrastructure — we bring engineering expertise, quality materials, and modern techniques to every project.
         </p>
         <a
           href="#contact"

@@ -88,7 +88,7 @@ const Header = () => {
             ))}
 
             <a
-              href="/quote"
+              href="/getquote"
               className="block mt-4 text-center text-sm font-bold bg-yellow-400 text-black py-2 rounded-full shadow hover:bg-white transition"
               onClick={() => setMobileMenuOpen(false)}
             >
