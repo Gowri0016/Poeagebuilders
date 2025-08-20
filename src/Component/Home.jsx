@@ -45,7 +45,7 @@ export default function Home() {
       title: "Poeage IT Solution",
       desc: "Delivering digital transformation and IT innovations that empower global businesses.",
       icon: <img src={Logo2} alt="Poeage IT Solution" className="w-20 h-20 object-contain rounded-full shadow-lg" />,
-      link: "https://poeageitsolution.com",
+      link: "https://poeage-it-solution.vercel.app/",
     },
     {
       title: "Poeage Hub",
