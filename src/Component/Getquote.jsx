@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser"; // ✅ Import EmailJS
+import logo from "../Asset/5.png"; // ✅ Your company logo
 
 export default function Getquote() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    service: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,9 +20,43 @@ export default function Getquote() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted:', formData);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', service: '', message: '' });
+    setLoading(true);
+
+    // ✅ Replace these with your EmailJS values
+    const serviceID = "service_c8zwr8d";
+    const templateID = "template_bcduukf";
+    const publicKey = "LFX8iNoiu475bAYhF";
+
+    emailjs.send(
+  serviceID,
+  templateID,
+  {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    service: formData.service,
+    message: formData.message,
+  },
+  publicKey
+   )
+      .then(
+        () => {
+          setLoading(false);
+          setSubmitted(true);
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            service: "",
+            message: "",
+          });
+        },
+        (error) => {
+          setLoading(false);
+          alert("❌ Failed to send. Please try again.");
+          console.error("EmailJS Error:", error);
+        }
+      );
   };
 
   const serviceHints = {
@@ -26,7 +64,7 @@ export default function Getquote() {
     "Commercial Projects": "Tailored solutions for offices, malls & complexes.",
     "Interior & Elevation Works": "Modern designs that stand out beautifully.",
     "Renovation & Remodeling": "Transform your old space into something new.",
-    "Other": "Tell us your unique requirement!",
+    Other: "Tell us your unique requirement!",
   };
 
   return (
@@ -37,6 +75,10 @@ export default function Getquote() {
         transition={{ duration: 0.6 }}
         className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-2xl"
       >
+        {/* ✅ Logo + Title */}
+        <div className="flex justify-center mb-4">
+          <img src={logo} alt="Poeage Builders Logo" className="w-20 h-20" />
+        </div>
         <h2 className="text-3xl font-extrabold bg-gradient-to-r from-yellow-600 to-yellow-800 text-transparent bg-clip-text mb-6 text-center">
           🏗️ Request a Quote from Poeage Builders
         </h2>
@@ -58,6 +100,16 @@ export default function Getquote() {
             name="email"
             placeholder="Your Email"
             value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 rounded-lg border border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+          <motion.input
+            whileFocus={{ scale: 1.02 }}
+            type="tel"
+            name="phone"
+            placeholder="Your Phone Number"
+            value={formData.phone}
             onChange={handleChange}
             required
             className="w-full px-4 py-3 rounded-lg border border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
@@ -101,13 +153,14 @@ export default function Getquote() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
+            disabled={loading}
             className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg transition"
           >
-            Request Quote
+            {loading ? "Sending..." : "Request Quote"}
           </motion.button>
         </form>
 
-        {/* Success Modal */}
+        {/* ✅ Success Modal */}
         <AnimatePresence>
           {submitted && (
             <motion.div
